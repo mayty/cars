@@ -2,4 +2,5 @@ venv
 .idea
 cars.egg-info
 .mypy_cache
+dumps
 .python-version

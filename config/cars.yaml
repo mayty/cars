@@ -1,0 +1,65 @@
+cars:
+  - brand: Audi
+    model: TT
+    generation: 8N
+  - brand: Audi
+    model: TT
+    generation: 8N · Рестайлинг
+  - brand: Mitsubishi
+    model: Lancer
+    generation: X
+  - brand: Mitsubishi
+    model: Lancer
+    generation: X · Рестайлинг
+  - brand: Mitsubishi
+    model: Eclipse
+    generation: 3G
+  - brand: Mitsubishi
+    model: Eclipse
+    generation: 4G
+  - brand: Ford
+    model: Mustang
+    generation: IV · Рестайлинг
+  - brand: Toyota
+    model: Celica
+    generation: VII (T230)
+  - brand: Toyota
+    model: Celica
+    generation: VII (T230) · Рестайлинг
+  - brand: Chrysler
+    model: Sebring
+    generation: II
+  - brand: Hyundai
+    model: Tiburon
+    generation: RD · Рестайлинг
+  - brand: Hyundai
+    model: Tiburon
+    generation: GK
+  - brand: Hyundai
+    model: Tiburon
+    generation: GK F, L2 · Рестайлинг
+  - brand: Hyundai
+    model: Tuscani
+  - brand: Honda
+    model: CR-Z
+  - brand: Jaguar
+    model: X-Type
+  - brand: Jaguar
+    model: S-Type
+  - brand: Alfa Romeo
+    model: 159
+  - brand: Mazda
+    model: 3
+    generation: BK
+  - brand: Mazda
+    model: 3
+    generation: BK · Рестайлинг
+  - brand: Dodge
+    model: Intrepid
+    generation: II
+  - brand: Dodge
+    model: Stratus
+    generation: II
+  - brand: Dodge
+    model: Stratus
+    generation: II · Рестайлинг
