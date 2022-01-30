@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: install package
-        run: make install_dev
+        run: make install
       - name: run codecheck
         run: make check
       - name: run tests
@@ -35,7 +35,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: install package
-        run: make install
+        run: make install_prod
       - name: Create results folder
         run: mkdir -p dumps
       - name: Collect data
