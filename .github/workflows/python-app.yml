@@ -42,4 +42,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: result
-          path: output/result.txt
+          path: dumps/result.txt
