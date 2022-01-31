@@ -78,7 +78,7 @@ def collect() -> None:
             sheet: Worksheet = wb.add_sheet(sheet_name)
             for column_id, column_name in enumerate(CarsParser.columns_order):
                 sheet.write(0, column_id, column_name, header_style)
-            for data in sorted(car_data, key=lambda x: x[3]):
+            for data in sorted(car_data, key=lambda x: (x[4], x[3])):
                 row_id = sheet.last_used_row + 1
                 for column_id, val in enumerate(data):
                     if column_id == 2:

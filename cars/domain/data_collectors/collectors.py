@@ -7,7 +7,7 @@ from cars.common import classproperty
 from cars.config import app_config
 from cars.exceptions import ApiRequestError, InvalidVendor, InvalidModel, InvalidGeneration
 
-CarDataT = Tuple[int, int, str, int]
+CarDataT = Tuple[int, int, str, int, str]
 
 
 class GenerationsMetadata:
@@ -187,7 +187,7 @@ class CarsParser:
 
     @classproperty
     def columns_order(self) -> Tuple[str, ...]:
-        return "цена", "год выпуска", "ссылка", "дней в продаже"
+        return "цена", "год выпуска", "ссылка", "дней в продаже", "тип кузова"
 
     @classmethod
     def render_car_data(cls, data: CarDataT) -> str:
@@ -252,7 +252,14 @@ class CarsParser:
         print(f"/{page_count}")
 
         for ad in response_data["adverts"]:
-            result.append((ad["price"]["usd"]["amount"], ad["year"], ad["publicUrl"], ad["originalDaysOnSale"]))
+            body_type = "-"
+            for _property in ad["properties"]:
+                if _property["name"] == "body_type":
+                    body_type = _property["value"]
+                    break
+            result.append(
+                (ad["price"]["usd"]["amount"], ad["year"], ad["publicUrl"], ad["originalDaysOnSale"], body_type),
+            )
 
         return result, next_page_id
 
