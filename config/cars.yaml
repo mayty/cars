@@ -5,6 +5,15 @@ cars:
   - brand: Audi
     model: TT
     generation: 8N · Рестайлинг
+  - brand: Audi
+    model: A5
+    generation: 8T
+  - brand: Audi
+    model: A1
+    generation: 8X
+  - brand: Infiniti
+    model: G
+    generation: III
   - brand: Mitsubishi
     model: Lancer
     generation: X
