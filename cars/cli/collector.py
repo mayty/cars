@@ -160,6 +160,6 @@ def collect() -> None:
         )
     current_time = datetime.datetime.now()
     current_time = current_time.replace(microsecond=0)
-    filename = f"dumps/{current_time.strftime('%d-%m-%Y.%H-%M-%S')}.xls"
+    filename = f"dumps/{current_time.strftime('%Y-%m-%d.%H-%M-%S')}.xls"
     click.echo(filename)
     wb.save(filename)
