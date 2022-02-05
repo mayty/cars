@@ -74,3 +74,14 @@ cars:
   - brand: Dodge
     model: Stratus
     generation: II · Рестайлинг
+  - brand: Honda
+    model: Civic
+    generation: VII
+  - brand: Honda
+    model: Civic
+    generation: VIII
+  - brand: Honda
+    model: Civic
+    generation: VIII · Рестайлинг
+
+
