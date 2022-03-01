@@ -1,56 +1,67 @@
 cars:
   - brand: Audi
     model: TT
-    generation: 8N
-  - brand: Audi
-    model: TT
-    generation: 8N · Рестайлинг
+    generations:
+      - 8N
+      - 8N · Рестайлинг
   - brand: Audi
     model: A5
-    generation: 8T
+    generations:
+      - 8T
+    body_types:
+      - купе
   - brand: Audi
     model: A1
-    generation: 8X
+    generations:
+      - 8X
   - brand: Infiniti
     model: G
-    generation: III
+    generations:
+      - III
+    body_types:
+      - купе
   - brand: Mitsubishi
     model: Lancer
-    generation: X
-  - brand: Mitsubishi
-    model: Lancer
-    generation: X · Рестайлинг
-  - brand: Mitsubishi
-    model: Eclipse
-    generation: 3G
+    generations:
+      - X
+      - X · Рестайлинг
   - brand: Mitsubishi
     model: Eclipse
-    generation: 4G
+    generations:
+      - 3G
+      - 4G
   - brand: Ford
     model: Mustang
-    generation: IV · Рестайлинг
+    generations:
+      - IV · Рестайлинг
   - brand: Toyota
     model: Celica
-    generation: VII (T230)
-  - brand: Toyota
-    model: Celica
-    generation: VII (T230) · Рестайлинг
+    generations:
+      - VII (T230)
+      - VII (T230) · Рестайлинг
   - brand: Chrysler
     model: Sebring
-    generation: II
+    generations:
+      - II
+    body_types:
+      - купе
+      - кабриолет
   - brand: Hyundai
     model: Tiburon
-    generation: RD · Рестайлинг
-  - brand: Hyundai
-    model: Tiburon
-    generation: GK
-  - brand: Hyundai
-    model: Tiburon
-    generation: GK F, L2 · Рестайлинг
+    generations:
+      - RD · Рестайлинг
+      - GK
+      - GK F, L2 · Рестайлинг
   - brand: Hyundai
     model: Tuscani
   - brand: Hyundai
     model: Genesis coupe
+  - brand: Hyundai
+    model: Coupe
+    generations:
+      - RD · Рестайлинг
+      - GK
+      - GK F, L2 · Рестайлинг
   - brand: Honda
     model: CR-Z
   - brand: Jaguar
@@ -61,16 +72,25 @@ cars:
     model: 159
   - brand: Mazda
     model: 3
-    generation: BK
-  - brand: Mazda
-    model: 3
-    generation: BK · Рестайлинг
+    generations:
+      - BK
+      - BK · Рестайлинг
   - brand: Dodge
     model: Intrepid
-    generation: II
+    generations:
+      - II
   - brand: Dodge
     model: Stratus
-    generation: II
-  - brand: Dodge
-    model: Stratus
-    generation: II · Рестайлинг
+    generations:
+      - II
+      - II · Рестайлинг
+    body_types:
+      - купе
+  - brand: Volkswagen
+    model: Scirocco
+    generations:
+      - III
+  - brand: Chevrolet
+    model: Cavalier
+  - brand: Ford
+    model: Cougar

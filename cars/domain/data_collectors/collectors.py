@@ -1,5 +1,5 @@
 import re
-from typing import Tuple, Optional, Dict, List
+from typing import Tuple, Optional, Dict, List, Iterable
 
 from requests import get, post
 
@@ -8,6 +8,15 @@ from cars.config import app_config
 from cars.exceptions import ApiRequestError, InvalidVendor, InvalidModel, InvalidGeneration
 
 CarDataT = Tuple[int, int, str, int, str]
+
+
+def init_basic_metadata() -> None:
+    response = get("https://cars.av.by/")
+    if response.status_code != 200:
+        raise ApiRequestError(f"Models Request Fail: {response.status_code}, {response.reason}")
+    data = response.content.decode()
+    VendorsMetadata.init_mapping(data)
+    BodyMetadata.init_mapping(data)
 
 
 class GenerationsMetadata:
@@ -102,35 +111,35 @@ class VendorsMetadata:
     _MODELS_MAPPING: Dict[int, ModelsMetadata] = {}
     _GENERATIONS_MAPPING: Dict[Tuple[int, int], GenerationsMetadata] = {}
 
+    @classmethod
+    def init_mapping(cls, data: str) -> None:
+        names_matches = re.findall(
+            pattern=r'(data-property-name="brand">)(.*?)(</button>)',
+            string=data,
+        )
+
+        names = set(name[1] for name in names_matches)
+
+        VendorsMetadata._ID_MAPPING = {}
+        for name in names:
+            name_fixed = name.replace("(", "\(")
+            name_fixed = name_fixed.replace(")", "\)")
+            id_matches = re.findall(
+                pattern=f'("id":)([0-9]*?)(,"label":"{name_fixed}")',
+                string=data,
+            )
+            ids = set(_id[1] for _id in id_matches)
+            if len(ids) != 1:
+                print(f"Ambiguous id: {name} - {ids}")
+                continue
+            VendorsMetadata._ID_MAPPING[name] = int(ids.pop())
+
+        assert VendorsMetadata._ID_MAPPING is not None
+
     @classproperty
     def id_mapping(cls) -> Dict[str, int]:
         if VendorsMetadata._ID_MAPPING is None:
-            response = get("https://cars.av.by/")
-            if response.status_code != 200:
-                raise ApiRequestError(f"Models Request Fail: {response.status_code}, {response.reason}")
-
-            data = response.content.decode()
-
-            names_matches = re.findall(
-                pattern=r'(data-property-name="brand">)(.*?)(</button>)',
-                string=data,
-            )
-
-            names = set(name[1] for name in names_matches)
-
-            VendorsMetadata._ID_MAPPING = {}
-            for name in names:
-                name_fixed = name.replace("(", "\(")
-                name_fixed = name_fixed.replace(")", "\)")
-                id_matches = re.findall(
-                    pattern=f'("id":)([0-9]*?)(,"label":"{name_fixed}")',
-                    string=data,
-                )
-                ids = set(_id[1] for _id in id_matches)
-                if len(ids) != 1:
-                    print(f"Ambiguous id: {name} - {ids}")
-                    continue
-                VendorsMetadata._ID_MAPPING[name] = int(ids.pop())
+            init_basic_metadata()
         assert VendorsMetadata._ID_MAPPING is not None
         return VendorsMetadata._ID_MAPPING
 
@@ -162,20 +171,64 @@ class VendorsMetadata:
 
     @classmethod
     def get_id(cls, vendor: str) -> int:
-        if vendor not in VendorsMetadata.id_mapping:
+        if vendor not in cls.id_mapping:
             raise InvalidVendor(
                 f"Brand {vendor} not found. " f"Must be one of {[key for key in cls.id_mapping.keys()]}."
             )
         return cls.id_mapping[vendor]
 
 
+class BodyMetadata:
+    _ID_MAPPING: Optional[Dict[str, int]] = None
+
+    @classmethod
+    def init_mapping(cls, data: str) -> None:
+        body_type_matches = re.findall(
+            pattern=r'("body_type":\{.*?"options":\[)(.*?)(\].*?\})',
+            string=data,
+        )
+        body_types_str = body_type_matches[0][1]
+        BodyMetadata._ID_MAPPING = {}
+        for match in re.findall(
+            pattern=r"\{.*?\}",
+            string=body_types_str,
+        ):
+            int_value = int(
+                re.findall(pattern='("intValue":)([0-9]*)', string=match,)[
+                    0
+                ][1]
+            )
+            name = re.findall(pattern='("label":")(.*?)(")', string=match,)[
+                0
+            ][1]
+            BodyMetadata._ID_MAPPING[name] = int_value
+
+    @classproperty
+    def id_mapping(cls) -> Dict[str, int]:
+        if BodyMetadata._ID_MAPPING is None:
+            init_basic_metadata()
+        assert BodyMetadata._ID_MAPPING is not None
+        return BodyMetadata._ID_MAPPING
+
+    @classmethod
+    def get_id(cls, body_type: str) -> int:
+        if body_type not in cls.id_mapping:
+            raise InvalidVendor(
+                f"Body type {body_type} not found. " f"Must be one of {[key for key in cls.id_mapping.keys()]}."
+            )
+        return cls.id_mapping[body_type]
+
+
 class CarsParser:
-    def __init__(self, vendor: str, model: str, revision: Optional[str]) -> None:
+    def __init__(self, vendor: str, model: str, revision: Optional[str], body_types: Optional[Iterable[str]]) -> None:
         self.brand: str = vendor
         self.brand_id: int = VendorsMetadata.get_id(self.brand)
         self.model: str = model
         self.model_id: int = VendorsMetadata.get_models(self.brand).get_model_id(self.model)
-        self.generation: Optional[str] = revision
+        self.body_type_ids: List[int] = (
+            [BodyMetadata.get_id(body_type) for body_type in body_types] if body_types else []
+        )
+        self.generation: Optional[str] = revision if revision else None
         self._car_data: Optional[List[CarDataT]] = None
 
     @property
@@ -226,13 +279,20 @@ class CarsParser:
         }
 
         if self.generation is not None:
-            assert self.generation is not None
             payload["properties"][0]["value"][0].append(  # type: ignore
                 {
                     "name": "generation",
                     "value": VendorsMetadata.get_generation_id(self.brand, self.model, self.generation),
                     "modified": True,
                     "previousValue": None,
+                }
+            )
+
+        if self.body_type_ids:
+            payload["properties"].append(
+                {  # type: ignore
+                    "name": "body_type",
+                    "value": self.body_type_ids,
                 }
             )
 

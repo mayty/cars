@@ -5,7 +5,8 @@ from typing import Optional, List
 class CarConfig(ImmutableBaseModel):
     brand: str
     model: str
-    generation: Optional[str]
+    generations: Optional[List[str]]
+    body_types: Optional[List[str]]
 
 
 class CarsConfig(ImmutableBaseModel):
