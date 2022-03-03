@@ -1,11 +1,14 @@
+from os import environ
 from pathlib import Path
 import yaml
 
 from cars.config.app import AppConfig
 from cars.config.cars import CarsConfig
 
-_config_path = Path("config/config.yaml").expanduser()
-_cars_path = Path("config/cars.yaml").expanduser()
+config_root = environ.get("CONFIG_PATH", "config/")
+
+_config_path = Path(f"{config_root}config.yaml").expanduser()
+_cars_path = Path(f"{config_root}cars.yaml").expanduser()
 
 _config_mapping = yaml.full_load(_config_path.read_text(encoding="utf-8"))
 _cars_config_mapping = yaml.full_load(_cars_path.read_text(encoding="utf-8"))

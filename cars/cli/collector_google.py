@@ -2,19 +2,7 @@ from typing import Optional, List, Any
 
 import click
 
-from cars.config import cars_config
-from cars.domain.data_collectors.collectors import CarsParser
-from cars.domain.google_sheets_integration.operations import (
-    AddSheet,
-    ClearSheet,
-    WriteData,
-    ChangeBorder,
-    ResizeColumns,
-    DeleteSheet,
-    MergeCells,
-)
-from cars.domain.google_sheets_integration.sheets import SheetsRequests
-from cars.exceptions import ApiRequestError, ProjectError
+from cars.domain.google_sheets_integration.operations import MergeCells
 
 
 @click.group("google_collecting")
@@ -71,6 +59,18 @@ def get_merge_operations(sheet_id: int, sheet_values: List[List[Any]], column_id
 )
 def collect(spreadsheet_id: Optional[str] = None):
     from os import environ
+    from cars.config import cars_config
+    from cars.domain.data_collectors.collectors import CarsParser
+    from cars.domain.google_sheets_integration.operations import (
+        AddSheet,
+        ClearSheet,
+        WriteData,
+        ChangeBorder,
+        ResizeColumns,
+        DeleteSheet,
+    )
+    from cars.domain.google_sheets_integration.sheets import SheetsRequests
+    from cars.exceptions import ApiRequestError, ProjectError
 
     if not spreadsheet_id:
         spreadsheet_id = environ.get("SPREADSHEET_ID")
