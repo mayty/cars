@@ -2,8 +2,15 @@ from typing import List, Any, Optional, Callable
 
 from cars.config import cars_config
 from cars.domain.data_collectors.collectors import CarsParser
-from cars.domain.google_sheets_integration.operations import AddSheet, ClearSheet, WriteData, ChangeBorder, \
-    ResizeColumns, DeleteSheet, MergeCells
+from cars.domain.google_sheets_integration.operations import (
+    AddSheet,
+    ClearSheet,
+    WriteData,
+    ChangeBorder,
+    ResizeColumns,
+    DeleteSheet,
+    MergeCells,
+)
 from cars.domain.google_sheets_integration.sheets import SheetsRequests
 from cars.exceptions import ApiRequestError, ProjectError
 
