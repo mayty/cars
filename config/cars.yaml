@@ -39,6 +39,10 @@ cars:
     generations:
       - VII (T230)
       - VII (T230) · Рестайлинг
+  - brand: Toyota
+    model: Camry Solara
+    generations:
+      - XV30
   - brand: Chrysler
     model: Sebring
     generations:
@@ -92,5 +96,7 @@ cars:
       - III
   - brand: Chevrolet
     model: Cavalier
+    body_types:
+      - купе
   - brand: Ford
     model: Cougar
