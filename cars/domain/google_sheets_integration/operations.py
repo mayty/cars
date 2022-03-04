@@ -156,6 +156,20 @@ class MergeCells(Operation):
         }
 
 
+class UnmergeAllCells(Operation):
+    def __init__(self, id_: int):
+        self.id = id_
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "unmergeCells": {
+                "range": {
+                    "sheetId": self.id,
+                }
+            }
+        }
+
+
 class ResizeColumns(Operation):
     def __init__(self, id_: int):
         self.id = id_

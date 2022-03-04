@@ -10,6 +10,7 @@ from cars.domain.google_sheets_integration.operations import (
     ResizeColumns,
     DeleteSheet,
     MergeCells,
+    UnmergeAllCells,
 )
 from cars.domain.google_sheets_integration.sheets import SheetsRequests
 from cars.exceptions import ApiRequestError, ProjectError
@@ -68,6 +69,7 @@ def collect_to_gsheet(spreadsheet_id: str, credentials_json_path: str, print_fun
         requests.add_operation(AddSheet(main_sheet_name, next_sheet_id))
         next_sheet_id += 1
     else:
+        requests.add_operation(UnmergeAllCells(sheets_data[main_sheet_name]["id"]))
         requests.add_operation(ClearSheet(sheets_data[main_sheet_name]["id"]))
         sheets_data[main_sheet_name]["used"] = True
 
