@@ -4,16 +4,6 @@ cars:
     generations:
       - 8N
       - 8N · Рестайлинг
-  - brand: Audi
-    model: A5
-    generations:
-      - 8T
-    body_types:
-      - купе
-  - brand: Audi
-    model: A1
-    generations:
-      - 8X
   - brand: Infiniti
     model: G
     generations:
@@ -30,10 +20,6 @@ cars:
     generations:
       - 3G
       - 4G
-  - brand: Ford
-    model: Mustang
-    generations:
-      - IV · Рестайлинг
   - brand: Toyota
     model: Celica
     generations:
@@ -68,17 +54,8 @@ cars:
       - GK F, L2 · Рестайлинг
   - brand: Honda
     model: CR-Z
-  - brand: Jaguar
-    model: X-Type
-  - brand: Jaguar
-    model: S-Type
   - brand: Alfa Romeo
     model: 159
-  - brand: Mazda
-    model: 3
-    generations:
-      - BK
-      - BK · Рестайлинг
   - brand: Dodge
     model: Intrepid
     generations:
@@ -90,10 +67,6 @@ cars:
       - II · Рестайлинг
     body_types:
       - купе
-  - brand: Volkswagen
-    model: Scirocco
-    generations:
-      - III
   - brand: Chevrolet
     model: Cavalier
     body_types:
