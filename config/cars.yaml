@@ -1,34 +1,15 @@
 cars:
+  - brand: Alfa Romeo
+    model: 159
   - brand: Audi
     model: TT
     generations:
       - 8N
       - 8N · Рестайлинг
-  - brand: Infiniti
-    model: G
-    generations:
-      - III
+  - brand: Chevrolet
+    model: Cavalier
     body_types:
       - купе
-  - brand: Mitsubishi
-    model: Lancer
-    generations:
-      - X
-      - X · Рестайлинг
-  - brand: Mitsubishi
-    model: Eclipse
-    generations:
-      - 3G
-      - 4G
-  - brand: Toyota
-    model: Celica
-    generations:
-      - VII (T230)
-      - VII (T230) · Рестайлинг
-  - brand: Toyota
-    model: Camry Solara
-    generations:
-      - XV30
   - brand: Chrysler
     model: Sebring
     generations:
@@ -36,26 +17,6 @@ cars:
     body_types:
       - купе
       - кабриолет
-  - brand: Hyundai
-    model: Tiburon
-    generations:
-      - RD · Рестайлинг
-      - GK
-      - GK F, L2 · Рестайлинг
-  - brand: Hyundai
-    model: Tuscani
-  - brand: Hyundai
-    model: Genesis coupe
-  - brand: Hyundai
-    model: Coupe
-    generations:
-      - RD · Рестайлинг
-      - GK
-      - GK F, L2 · Рестайлинг
-  - brand: Honda
-    model: CR-Z
-  - brand: Alfa Romeo
-    model: 159
   - brand: Dodge
     model: Intrepid
     generations:
@@ -67,9 +28,48 @@ cars:
       - II · Рестайлинг
     body_types:
       - купе
-  - brand: Chevrolet
-    model: Cavalier
-    body_types:
-      - купе
   - brand: Ford
     model: Cougar
+  - brand: Honda
+    model: CR-Z
+  - brand: Hyundai
+    model: Coupe
+    generations:
+      - RD · Рестайлинг
+      - GK
+      - GK F, L2 · Рестайлинг
+  - brand: Hyundai
+    model: Genesis coupe
+  - brand: Hyundai
+    model: Tiburon
+    generations:
+      - RD · Рестайлинг
+      - GK
+      - GK F, L2 · Рестайлинг
+  - brand: Hyundai
+    model: Tuscani
+  - brand: Infiniti
+    model: G
+    generations:
+      - III
+    body_types:
+      - купе
+  - brand: Mitsubishi
+    model: Eclipse
+    generations:
+      - 3G
+      - 4G
+  - brand: Mitsubishi
+    model: Lancer
+    generations:
+      - X
+      - X · Рестайлинг
+  - brand: Toyota
+    model: Camry Solara
+    generations:
+      - XV30
+  - brand: Toyota
+    model: Celica
+    generations:
+      - VII (T230)
+      - VII (T230) · Рестайлинг
