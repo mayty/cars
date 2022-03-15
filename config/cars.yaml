@@ -1,6 +1,4 @@
 cars:
-  - brand: Alfa Romeo
-    model: 159
   - brand: Audi
     model: TT
     generations:
@@ -18,10 +16,6 @@ cars:
       - купе
       - кабриолет
   - brand: Dodge
-    model: Intrepid
-    generations:
-      - II
-  - brand: Dodge
     model: Stratus
     generations:
       - II
@@ -30,8 +24,8 @@ cars:
       - купе
   - brand: Ford
     model: Cougar
-  - brand: Honda
-    model: CR-Z
+  - brand: Ford
+    model: Probe
   - brand: Hyundai
     model: Coupe
     generations:
@@ -48,22 +42,11 @@ cars:
       - GK F, L2 · Рестайлинг
   - brand: Hyundai
     model: Tuscani
-  - brand: Infiniti
-    model: G
-    generations:
-      - III
-    body_types:
-      - купе
   - brand: Mitsubishi
     model: Eclipse
     generations:
       - 3G
       - 4G
-  - brand: Mitsubishi
-    model: Lancer
-    generations:
-      - X
-      - X · Рестайлинг
   - brand: Toyota
     model: Camry Solara
     generations:
