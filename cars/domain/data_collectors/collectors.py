@@ -265,14 +265,16 @@ class CarsParser:
                             {
                                 "name": "model",
                                 "value": self.model_id,
-                                "modified": True,
-                                "previousValue": None,
                             },
                         ],
                     ],
                 },
                 {
                     "name": "price_currency",
+                    "value": 2,
+                },
+                {
+                    "name": "transmission_type",
                     "value": 2,
                 },
             ],
@@ -283,8 +285,6 @@ class CarsParser:
                 {
                     "name": "generation",
                     "value": VendorsMetadata.get_generation_id(self.brand, self.model, self.generation),
-                    "modified": True,
-                    "previousValue": None,
                 }
             )
 

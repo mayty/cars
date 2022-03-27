@@ -105,6 +105,9 @@ def collect_to_gsheet(spreadsheet_id: str, credentials_json_path: str, print_fun
                 print_func(ex)
                 continue
 
+            if not car_data:
+                continue
+
             if sheet_name not in sheets_data:
                 sheets_data[sheet_name] = {
                     "id": next_sheet_id,
@@ -116,7 +119,8 @@ def collect_to_gsheet(spreadsheet_id: str, credentials_json_path: str, print_fun
                 sheets_data[sheet_name]["used"] = True
             new_spreadsheet_data = [list(columns_order)]
 
-            for ad_data in sorted(car_data, key=lambda x: (x[4], x[3])):
+            max_year = max(x[1] for x in car_data)
+            for ad_data in sorted(car_data, key=lambda x: (max_year - x[1], x[4], x[3])):
                 new_spreadsheet_data.append(list(ad_data))
 
             new_summary_values.append(

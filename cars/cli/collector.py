@@ -93,6 +93,8 @@ class DataCollector:
     def add_car_data(self, brand: str, model: str, generation: str, body_types: Optional[List[str]]) -> None:
         parser = CarsParser(brand, model, generation, body_types)
         car_data = parser.car_data
+        if not car_data:
+            return
 
         sheet_name = f"{brand} {model}"
         if generation:
@@ -102,7 +104,8 @@ class DataCollector:
         sheet: Worksheet = self.wb.add_sheet(sheet_name)
         for column_id, column_name in enumerate(CarsParser.columns_order):
             sheet.write(0, column_id, column_name, self.header_style)
-        for data in sorted(car_data, key=lambda x: (x[4], x[3])):
+        max_year = max(x[1] for x in car_data)
+        for data in sorted(car_data, key=lambda x: (max_year - x[1], x[4], x[3])):
             row_id = sheet.last_used_row + 1
             for column_id, val in enumerate(data):
                 if column_id == 2:
